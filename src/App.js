@@ -89,6 +89,7 @@ function App() {
             else if (showFavorites === false && hit.created_at && hit.author && hit.story_url && hit.story_title) {
               return (<Card cardInfo={hit} key={hit.objectID} hits={hits} />)
             }
+            return console.log('')
           })
         }
       </div>
