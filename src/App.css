@@ -1,15 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+  font-family: 'Roboto';
+}
 .Front-End-Test---Home-view {
-  width: 1440px;
-  height: 1024px;
-  padding: 0 0 98px;
+  width: 100vw;
+  height: 100vh;
   background-color: #fcfcfc;
 }
 
-.Rectangle-2-Copy {
-  width: 1440px;
-  height: 114px;
+.header {
+  width: 100vw;
+  height: 7.125rem;
   margin: 0 0 70px;
-  padding: 44px 1082px 42px 150px;
+  padding: 0x 0px 0px 150px;
   box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 0.12);
   background-image: linear-gradient(to bottom, #ececec -32%, #fff 124%);
+}
+
+img.hacker-news {
+  width: 13rem;
+  height: 1.75rem;
+  object-fit: contain;
+  color: #3b3b3b;
+  margin: 2.75rem 0 2.625rem 9.375rem
+}
+
+.rectangle {
+  width: 6.125rem;
+  height: 1.938rem;
+  border-radius: 0.125rem;
+  border: solid 1px #1797ff;
+}
+
+
+.all-myFaves{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 2;
+  text-align: center;
+}
+
+.select {
+  width: 15rem;
+  height: 2rem;
+  margin: 3.938rem 0 0 9.375rem;
+  padding: 5px 12px 5px 12px;
+  border-radius: 4px;
+  border: solid 1px #2e2e2e;
+  background-color: #fff;
+}
+
+.cards-section{
+  margin-left: 9.375rem;
+  margin-top: 2.375rem;
+}
+
+.card{
+    display: flex;
+    width: 34.375rem;
+    height: 5.625rem;
+    margin: 0 2.5rem 1.875rem 0;
+    opacity: 0.8;
+    border-radius: 6px;
+    border: solid 1px #979797;
+    background-color: #fff;
+}
+
+.card-body{
+  width: 30.125rem;
+  background-color: #2e2e2e;
+  margin-left: 26px;
+}
+
+.card-fav{
+  width: 4.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-time{
+  display: flex;
+  font-size: 0.688rem;
+  color: #767676;
+  column-gap: 5px;
 }
