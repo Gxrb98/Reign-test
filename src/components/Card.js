@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import clock from '../img/clock.svg'
 import dayjs from 'dayjs'
 import hearth1 from '../img/hearth1.svg'
@@ -32,7 +32,7 @@ export const Card = ({ cardInfo, hits }) => {
 
     return (
         <div className='card'>
-            <a href={cardInfo.story_url} target='_blank' className='card-body'>
+            <a href={cardInfo.story_url} target='_blank' className='card-body' rel="noreferrer">
                 <p className='card-time'>
                     <img src={clock} alt='clock icon' />
                     <span>{timeAgo} by author</span>
