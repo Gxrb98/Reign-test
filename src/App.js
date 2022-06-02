@@ -7,13 +7,18 @@ import { useState, useEffect } from 'react';
 
 
 function App() {
+
+
   /************************************************************************************* 
  ***************** These variables store data from the local storage *****************
  *************************************************************************************/
   const newsSelectedLocalStorage = localStorage.getItem('newsSelected') || ''
   const hitsLocalStorage = JSON.parse(localStorage.getItem('hits')) || []
+  const favoriteLocalStorage = JSON.parse(localStorage.getItem('favorite')) || false
   const [newsSelected, setNewSelected] = useState(newsSelectedLocalStorage)
   const [hits, setHits] = useState(hitsLocalStorage)
+  const [showFavorites, setShowFavorites] = useState(favoriteLocalStorage)
+
 
 
 
@@ -28,6 +33,10 @@ function App() {
     } catch (e) {
       console.log(e)
     }
+  }
+
+  const showFaves = () => {
+
   }
 
   useEffect(() => {
@@ -51,12 +60,20 @@ function App() {
         </img>
       </div>
       <div className='all-myFaves'>
-        <span className="rectangle">
+        <button className="btn"
+          onClick={() => {
+            setShowFavorites(false);
+            localStorage.setItem('favorite', false)
+          }}>
           All
-        </span>
-        <span className="rectangle">
+        </button>
+        <button className="btn"
+          onClick={() => {
+            setShowFavorites(true)
+            localStorage.setItem('favorite', true)
+          }}>
           My faves
-        </span>
+        </button>
       </div>
       <div >
         <select className="select" value={newsSelected} onChange={selectNews}>
@@ -67,10 +84,14 @@ function App() {
         </select>
       </div>
       <div className='cards-section'>
-        <button onClick={() => console.log(hits)}>See whats is going on</button>
         {
-          hits.map((hit) => {
-            return <Card cardInfo={hit} key={hit.objectID} hits={hits} />
+          hits.map(hit => {
+            if (showFavorites && hit.created_at && hit.author && hit.story_url && hit.story_title && hit.favorite) {
+              return (<Card cardInfo={hit} key={hit.objectID} hits={hits} />)
+            }
+            else if (showFavorites === false && hit.created_at && hit.author && hit.story_url && hit.story_title) {
+              return (<Card cardInfo={hit} key={hit.objectID} hits={hits} />)
+            }
           })
         }
       </div>

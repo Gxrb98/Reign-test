@@ -26,11 +26,23 @@ img.hacker-news {
   margin: 2.75rem 0 2.625rem 9.375rem
 }
 
-.rectangle {
+.btn {
   width: 6.125rem;
   height: 1.938rem;
   border-radius: 0.125rem;
-  border: solid 1px #1797ff;
+  border: solid 2px #606060;
+  color:#606060
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-clicked {
+  width: 6.125rem;
+  height: 1.938rem;
+  border: solid 2px #1797ff;
+  color: #1797ff
 }
 
 
@@ -70,9 +82,11 @@ img.hacker-news {
     background-color: #fff;
 }
 
-.card-body{
+a.card-body{
   width: 30.125rem;
   margin-left: 26px;
+  text-decoration: none;
+  color:#6b6b6b
   
 }
 
@@ -88,8 +102,11 @@ img.hacker-news {
   font-size: 0.688rem;
   align-items: center;
   padding: 0; 
-  color: #767676;
   column-gap: 0.4rem;
+}
+
+a:link.card-body{
+  color:#6b6b6b
 }
 
 .card-title{
@@ -98,4 +115,8 @@ img.hacker-news {
 
 .card-fav{
   z-index: 50;
+}
+
+.card-fav img{
+  cursor: pointer;
 }

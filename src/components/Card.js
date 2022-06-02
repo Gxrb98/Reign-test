@@ -13,18 +13,20 @@ export const Card = ({ cardInfo, hits }) => {
     const [hearthType, setHearthType] = useState(cardInfo.icon || hearth1);
     const timeAgo = dayjs(cardInfo.created_at).fromNow()
 
-    //Change the hearth icon 
+    //Change the hearth icon and store a new array of favorites hits
     const handleFavorite = () => {
         console.log(cardInfo)
         if (hearthType === hearth1) {
             setHearthType(favorite)
             cardInfo.icon = favorite
+            cardInfo.favorite = true
         } else {
             setHearthType(hearth1)
             cardInfo.icon = hearth1
+            cardInfo.favorite = false
         }
         let auxVar = hits.filter((hit) => hit.objectID !== cardInfo.objectID)
-        auxVar.unshift(cardInfo)
+        auxVar.push(cardInfo)
         localStorage.setItem('hits', JSON.stringify(hits))
     }
 
