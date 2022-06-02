@@ -12,13 +12,13 @@ export const Card = ({ cardInfo }) => {
         <div className='card'>
             <div className='card-body'>
                 <p className='card-time'>
-                    <img src={clock} />
+                    <img src={clock} alt='clock icon' />
                     <span>{timeAgo}</span>
                 </p>
                 <p>body</p>
             </div>
             <div className='card-fav'>
-                <img src="img/iconmonstr-favorite-3.png" />
+                <img src="img/iconmonstr-favorite-3.png" alt='favorite selector' />
             </div>
         </ div>
     )

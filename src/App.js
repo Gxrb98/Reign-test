@@ -1,6 +1,5 @@
 import './App.css';
 import hackerNews from './img/hacker-news.png'
-import angularImg from './img/angular.png'
 import { Card } from './components/Card'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -37,7 +36,7 @@ function App() {
   return (
     <div className="home-view">
       <div className="header">
-        <img src={hackerNews} className="hacker-news">
+        <img src={hackerNews} className="hacker-news" alt='Hacker News'>
         </img>
       </div>
       <div className='all-myFaves'>
