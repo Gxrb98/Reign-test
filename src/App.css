@@ -9,6 +9,10 @@
   background-color: #fcfcfc;
 }
 
+button{
+  all: unset;
+}
+
 .header {
   width: 100vw;
   height: 7.125rem;

@@ -110,20 +110,20 @@ function App() {
         </img>
       </div>
       <div className='all-myFaves'>
-        <a href='!#' className={allBtn}
+        <button className={allBtn}
           onClick={() => {
             setShowFavorites(false);
             localStorage.setItem('favorite', false)
           }}>
           All
-        </a>
-        <a href='!#' className={favBtn}
+        </button>
+        <button className={favBtn}
           onClick={() => {
             setShowFavorites(true)
             localStorage.setItem('favorite', true)
           }}>
           My faves
-        </a>
+        </button>
       </div>
       <div >
         <select className="select" value={newsSelected} onChange={selectNews}>
