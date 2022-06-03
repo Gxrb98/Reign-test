@@ -88,17 +88,18 @@ function App() {
   const [allBtn, setAllBtn] = useState('btn-clicked')
   const [favBtn, setFavBtn] = useState('btn')
 
-  const handleAllFavesBtns = () => {
-    if (showFavorites === true) {
-      setAllBtn('btn')
-      setFavBtn('btn-clicked')
-    } else {
-      setAllBtn('btn-clicked')
-      setFavBtn('btn')
-    }
-  }
+
 
   useEffect(() => {
+    const handleAllFavesBtns = () => {
+      if (showFavorites === true) {
+        setAllBtn('btn')
+        setFavBtn('btn-clicked')
+      } else {
+        setAllBtn('btn-clicked')
+        setFavBtn('btn')
+      }
+    }
     handleAllFavesBtns()
   }, [showFavorites])
 
@@ -143,7 +144,7 @@ function App() {
               else if (showFavorites === false) {
                 return (<Card cardInfo={hit} key={hit.objectID} hits={hits} organizeHits={organizeHits} />)
               } else {
-                return console.log('')
+                return;
               }
             })
           }
