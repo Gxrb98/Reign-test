@@ -144,7 +144,7 @@ function App() {
               else if (showFavorites === false) {
                 return (<Card cardInfo={hit} key={hit.objectID} hits={hits} organizeHits={organizeHits} />)
               } else {
-                return;
+                return console.log('');
               }
             })
           }
