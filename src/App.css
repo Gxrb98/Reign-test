@@ -23,19 +23,24 @@ img.hacker-news {
   height: 1.75rem;
   object-fit: contain;
   color: #3b3b3b;
-  margin: 2.75rem 0 2.625rem 9.375rem
+  margin: 2.75rem 0 2.625rem 10vw
 }
 
 .btn {
   width: 6.125rem;
   height: 1.938rem;
   border-radius: 0.125rem;
-  border: solid 2px #606060;
-  color:#606060
+  border: solid 2px#d6d6d6;
+  background-color: #fff;
+  color:#606060;
 }
 
 .btn:hover {
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
 
 .btn-clicked {
@@ -59,7 +64,7 @@ img.hacker-news {
 .select {
   width: 15rem;
   height: 2rem;
-  margin: 3.938rem 0 0 8vw;
+  margin: 3.938rem 0 0 10vw;
   padding: 5px 12px 5px 12px;
   border-radius: 4px;
   border: solid 1px #2e2e2e;
@@ -67,35 +72,60 @@ img.hacker-news {
 }
 
 .cards-section{
-  margin-left: 8vw;
-  margin-top: 2.375rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-items: center;
+  
+}
+
+.container{
+  display: flex;
+  margin-left: 10vw;
+  margin-top: 2.4rem;
+  column-gap: 2rem;
+  width: 90%;
+  height: 100%;
+  flex-wrap: wrap;
 }
 
 .card{
     display: flex;
-    width: 34.375rem;
-    height: 5.625rem;
-    margin: 0 2.5rem 1.875rem 0;
+    width: 34.376rem;
+    height: 5.626rem;
+    margin: 1rem 1rem 1.875rem 0;
     opacity: 0.8;
     border-radius: 6px;
     border: solid 1px #979797;
     background-color: #fff;
+    object-fit: contain;
 }
+
 
 a.card-body{
   width: 30.125rem;
   margin-left: 26px;
   text-decoration: none;
-  color:#6b6b6b
-  
+  color:#6b6b6b;
+}
+
+a.card-body:hover{
+  opacity: 0.4;
 }
 
 .card-fav{
-  width: 4.25rem;
+  width: 4rem;
+  border-radius: solid 1px #979797;
+  border-radius: 0 8px 8px 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color:#f7f1f1;
+  object-fit: cover;
 }
+
 
 .card-time{
   display: flex;
@@ -113,10 +143,47 @@ a:link.card-body{
   letter-spacing: 0.25px;
 }
 
-.card-fav{
-  z-index: 50;
-}
 
 .card-fav img{
   cursor: pointer;
 }
+
+.nav{
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination-list{
+  list-style-type: none;
+  display: flex;
+}
+
+
+.page-item{
+  display: flex;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: 0 8px;
+  border-radius: 6px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  text-align: center;
+}
+
+.page-item:hover{
+  cursor: pointer;
+}
+
+
+.page-item a{
+  display: flex;
+  align-items: center;
+  font-family: Roboto;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.65);
+  text-decoration: none;
+}
+

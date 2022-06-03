@@ -8,26 +8,24 @@ dayjs.extend(relativeTime)
 
 
 
-export const Card = ({ cardInfo, hits }) => {
+export const Card = ({ cardInfo, hits, organizeHits }) => {
 
     const [hearthType, setHearthType] = useState(cardInfo.icon || hearth1);
     const timeAgo = dayjs(cardInfo.created_at).fromNow()
 
     //Change the hearth icon and store a new array of favorites hits
     const handleFavorite = () => {
-        console.log(cardInfo)
         if (hearthType === hearth1) {
             setHearthType(favorite)
             cardInfo.icon = favorite
+            //this key is used to valite when the option to show favorite is on
             cardInfo.favorite = true
         } else {
             setHearthType(hearth1)
             cardInfo.icon = hearth1
             cardInfo.favorite = false
         }
-        let auxVar = hits.filter((hit) => hit.objectID !== cardInfo.objectID)
-        auxVar.push(cardInfo)
-        localStorage.setItem('hits', JSON.stringify(hits))
+        organizeHits(hits, cardInfo, hearthType)
     }
 
     return (

@@ -3,6 +3,8 @@ import hackerNews from './img/hacker-news.png'
 import { Card } from './components/Card'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Pagination } from './components/Pagination';
+import hearth1 from './img/hearth1.svg'
 
 
 
@@ -10,38 +12,71 @@ function App() {
 
 
   /************************************************************************************* 
+ ***************** variables to paginate **********************************************
+ *************************************************************************************/
+  const [currentPage, setCurrentPage] = useState(1)
+  const [hitsPerPage] = useState(8)
+
+  /************************************************************************************* 
  ***************** These variables store data from the local storage *****************
  *************************************************************************************/
   const newsSelectedLocalStorage = localStorage.getItem('newsSelected') || ''
   const hitsLocalStorage = JSON.parse(localStorage.getItem('hits')) || []
   const favoriteLocalStorage = JSON.parse(localStorage.getItem('favorite')) || false
+
   const [newsSelected, setNewSelected] = useState(newsSelectedLocalStorage)
   const [hits, setHits] = useState(hitsLocalStorage)
   const [showFavorites, setShowFavorites] = useState(favoriteLocalStorage)
 
 
-
+  /************************************************************************************* 
+   ***************** get current hits *****************
+   *************************************************************************************/
+  const indexOfLastHit = currentPage * hitsPerPage
+  const indexOfFirstHit = indexOfLastHit - hitsPerPage
+  const currentHits = hits.slice(indexOfFirstHit, indexOfLastHit)
 
   /************************************************************************************* 
-   ***************** get data from API and store it con local storage *****************
+   *************** get data from API, filtering it   ***********************************
    *************************************************************************************/
   const selectNews = async (event) => {
     setNewSelected(event.target.value)
     const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?query=${event.target.value}&page=0`)
     try {
-      setHits(res.data.hits);
+      let filteredHits = res.data.hits.filter(hit =>
+        hit.story_url && hit.created_at && hit.author && hit.story_title
+      )
+      setHits(filteredHits);
     } catch (e) {
       console.log(e)
     }
   }
 
+  /************************************************************************************* 
+   ****************************** Changes pagination current Page **********************
+   *************************************************************************************/
+  const paginate = pageNumber => setCurrentPage(pageNumber)
+
 
   useEffect(() => {
 
-    //store the filter selected in local storage
+    //store the selected filter in local storage
     localStorage.setItem('newsSelected', newsSelected)
 
   }, [newsSelected])
+
+
+  /************************************************************************************* 
+   *************************** organize favorite hits first **********************
+   *************************************************************************************/
+  const organizeHits = (toFilter, toCompare, toCompareIfPushOrUnshift) => {
+
+    let auxVar = toFilter.filter((hit) => hit.objectID !== toCompare.objectID)
+    toCompareIfPushOrUnshift === hearth1 ? auxVar.unshift(toCompare) : auxVar.push(toCompare)
+    setHits(auxVar)
+    localStorage.setItem('hits', JSON.stringify(auxVar))
+  }
+
 
   useEffect(() => {
 
@@ -49,6 +84,23 @@ function App() {
     localStorage.setItem('hits', JSON.stringify(hits))
   }, [hits])
 
+  //Manage all and fave button colors
+  const [allBtn, setAllBtn] = useState('btn-clicked')
+  const [favBtn, setFavBtn] = useState('btn')
+
+  const handleAllFavesBtns = () => {
+    if (showFavorites === true) {
+      setAllBtn('btn')
+      setFavBtn('btn-clicked')
+    } else {
+      setAllBtn('btn-clicked')
+      setFavBtn('btn')
+    }
+  }
+
+  useEffect(() => {
+    handleAllFavesBtns()
+  }, [showFavorites])
 
   return (
     <div className="home-view">
@@ -57,41 +109,48 @@ function App() {
         </img>
       </div>
       <div className='all-myFaves'>
-        <button className="btn"
+        <a href='!#' className={allBtn}
           onClick={() => {
             setShowFavorites(false);
             localStorage.setItem('favorite', false)
           }}>
           All
-        </button>
-        <button className="btn"
+        </a>
+        <a href='!#' className={favBtn}
           onClick={() => {
             setShowFavorites(true)
             localStorage.setItem('favorite', true)
           }}>
           My faves
-        </button>
+        </a>
       </div>
       <div >
         <select className="select" value={newsSelected} onChange={selectNews}>
-          <option>Select your news</option>
-          <option value='reactjs'>React</option>
+          <option hidden>Select your news</option>
+          <option value='angular' >Angular</option>
+          <option value='reactjs'>Reactjs</option>
           <option value='vuejs'>Vuejs</option>
-          <option value='angular'>Angular</option>
+
         </select>
       </div>
       <div className='cards-section'>
-        {
-          hits.map(hit => {
-            if (showFavorites && hit.created_at && hit.author && hit.story_url && hit.story_title && hit.favorite) {
-              return (<Card cardInfo={hit} key={hit.objectID} hits={hits} />)
-            }
-            else if (showFavorites === false && hit.created_at && hit.author && hit.story_url && hit.story_title) {
-              return (<Card cardInfo={hit} key={hit.objectID} hits={hits} />)
-            }
-            return console.log('')
-          })
-        }
+        <div className='container'>
+          {
+            currentHits.map(hit => {
+              if (showFavorites && hit.favorite) {
+                return (<Card cardInfo={hit} key={hit.objectID} hits={hits} organizeHits={organizeHits} />)
+              }
+              else if (showFavorites === false) {
+                return (<Card cardInfo={hit} key={hit.objectID} hits={hits} organizeHits={organizeHits} />)
+              } else {
+                return console.log('')
+              }
+            })
+          }
+        </div>
+      </div>
+      <div className='nav'>
+        <Pagination hitsPerPage={hitsPerPage} totalHits={hits.length} paginate={paginate} />
       </div>
     </div >
   );
